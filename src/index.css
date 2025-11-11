@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables for Voxel Colors */
+:root {
+  --color-blue: #5BA3FF;
+  --color-blue-dark: #4A8FFF;
+  --color-orange: #FFB347;
+  --color-orange-dark: #FFA500;
+  --color-gold: #FFE44D;
+  --color-dark: #2D2D5F;
+}
+
+/* Global styles */
+body {
+  background-color: var(--color-dark);
+  color: white;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Voxel letter button styles */
+.voxel-letter {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(135deg, var(--color-blue), var(--color-blue-dark));
+  color: white;
+  font-weight: bold;
+  font-size: 1.125rem;
+  border: none;
+  border-radius: 0.125rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.3), inset -2px -2px 0 rgba(0,0,0,0.2), inset 2px 2px 0 rgba(255,255,255,0.3);
+  transform: perspective(200px) rotateX(5deg);
+  image-rendering: pixelated;
+}
+
+.voxel-letter:active,
+.voxel-letter.selected {
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.3), inset -2px -2px 0 rgba(0,0,0,0.2);
+  transform: perspective(200px) rotateX(5deg) translateY(-4px);
+}
+
+.voxel-letter.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.voxel-letter.selected::after {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: var(--color-gold);
+  color: var(--color-dark);
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  content: attr(data-index);
+}
+
+/* Voxel button */
+.voxel-btn {
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.125rem;
+  transition: all 0.1s ease;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.3), inset -2px -2px 0 rgba(0,0,0,0.2), inset 2px 2px 0 rgba(255,255,255,0.3);
+}
+
+.voxel-btn:active {
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.3), inset -2px -2px 0 rgba(0,0,0,0.2);
+  transform: translateY(2px) translateX(2px);
+}
+
+/* Gold coin animation */
+@keyframes coinFall {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) rotate(360deg);
+  }
+}
+
+@keyframes coinSpin {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+.coin {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--color-gold);
+  border-radius: 50%;
+  animation: coinFall 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4), inset -2px -2px 0 rgba(0,0,0,0.3), inset 2px 2px 0 rgba(255,255,255,0.5);
+  z-index: 1000;
+}
+
+/* Score counter bounce */
+@keyframes scoreBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.score-update {
+  animation: scoreBounce 0.3s ease-out;
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.15s ease;
+}
