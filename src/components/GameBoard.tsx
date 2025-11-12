@@ -16,6 +16,7 @@ interface GameBoardProps {
   message: string;
   messageType: 'error' | 'success' | 'info' | '';
   onLetterClick: (index: number) => void;
+  onLetterDeselect?: (index: number) => void;
   onBackspace: () => void;
   onClear: () => void;
   onCheck: () => void;
@@ -32,6 +33,7 @@ export function GameBoard({
   message,
   messageType,
   onLetterClick,
+  onLetterDeselect,
   onBackspace,
   onClear,
   onCheck,
@@ -42,17 +44,15 @@ export function GameBoard({
 
   return (
     <div
-      className="w-full mx-auto p-4 overflow-y-auto"
+      className="w-full mx-auto p-3 overflow-y-auto"
       style={{
         maxHeight: `${maxHeight}px`,
         backgroundColor: 'var(--color-dark)',
       }}
     >
-      {/* Header with Score */}
-      <div className="flex justify-between items-center mb-8">
-        <div style={{ width: '100px' }}></div>
+      {/* Header with Score in top-right */}
+      <div className="mb-3 text-right">
         <ScoreDisplay score={totalScore} />
-        <div style={{ width: '100px' }}></div>
       </div>
 
       {/* Mode Selector */}
@@ -61,25 +61,27 @@ export function GameBoard({
       {/* Message */}
       <Message message={message} type={messageType} />
 
-      {/* Base Word */}
-      <BaseWord
-        word={baseWord}
-        selectedIndices={selectedIndices}
-        mode={mode}
-        onLetterClick={onLetterClick}
-      />
-
-      {/* Current Word Being Built */}
-      <CurrentWord baseWord={baseWord} selectedIndices={selectedIndices} />
-
-      {/* Controls */}
-      <div className="mb-8">
-        <Controls
-          hasSelection={selectedIndices.length > 0}
-          onBackspace={onBackspace}
-          onClear={onClear}
-          onCheck={onCheck}
+      {/* Consolidated Play Area */}
+      <div className="mb-4 bg-opacity-10 p-3 rounded" style={{ backgroundColor: 'rgba(74, 144, 226, 0.05)' }}>
+        {/* Base Word */}
+        <BaseWord
+          word={baseWord}
+          selectedIndices={selectedIndices}
+          mode={mode}
+          onLetterClick={onLetterClick}
+          onLetterDeselect={onLetterDeselect}
         />
+
+        {/* Current Word Being Built */}
+        <CurrentWord baseWord={baseWord} selectedIndices={selectedIndices} />
+
+        {/* Controls */}
+        <div className="mt-3">
+          <Controls
+            hasSelection={selectedIndices.length > 0}
+            onCheck={onCheck}
+          />
+        </div>
       </div>
 
       {/* Found Words */}
@@ -87,10 +89,10 @@ export function GameBoard({
 
       {/* Next Word Button */}
       {onNextWord && (
-        <div className="mt-8 text-center">
+        <div className="mt-4 text-center">
           <button
             onClick={onNextWord}
-            className="voxel-btn text-lg px-6 py-3 font-bold"
+            className="voxel-btn text-sm px-4 py-2 font-bold"
             style={{
               backgroundColor: 'var(--color-blue)',
               color: 'white',
@@ -102,7 +104,7 @@ export function GameBoard({
       )}
 
       {/* Footer spacer for scrolling on mobile */}
-      <div style={{ height: '2rem' }}></div>
+      <div style={{ height: '1rem' }}></div>
     </div>
   );
 }

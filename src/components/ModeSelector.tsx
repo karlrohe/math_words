@@ -30,32 +30,29 @@ const MODES: { value: GameMode; label: string; description: string }[] = [
 
 export function ModeSelector({ currentMode, onModeChange }: ModeSelectorProps) {
   return (
-    <div className="mb-6">
-      <p className="text-sm mb-3 text-center" style={{ color: 'var(--color-orange)' }}>
-        Challenge Mode:
-      </p>
-      <div className="flex flex-wrap gap-2 justify-center">
+    <div className="mb-3">
+      <div className="flex flex-wrap gap-1 justify-center">
         {MODES.map(mode => (
           <button
             key={mode.value}
             onClick={() => onModeChange(mode.value)}
-            className="px-3 py-2 rounded-sm text-sm font-bold transition-all"
+            className="px-2 py-1 rounded-sm text-xs font-bold transition-all"
             style={{
               backgroundColor:
                 currentMode === mode.value
                   ? 'var(--color-orange)'
-                  : 'rgba(74, 144, 226, 0.3)',
+                  : 'rgba(74, 144, 226, 0.2)',
               color:
                 currentMode === mode.value ? 'var(--color-dark)' : 'white',
-              border: `2px solid ${
+              border: `1px solid ${
                 currentMode === mode.value
                   ? 'var(--color-orange)'
-                  : 'var(--color-blue)'
+                  : 'rgba(74, 144, 226, 0.5)'
               }`,
             }}
             title={mode.description}
           >
-            {mode.label}
+            {mode.label.split(' ')[0]}
           </button>
         ))}
       </div>

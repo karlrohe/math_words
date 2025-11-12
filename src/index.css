@@ -32,16 +32,16 @@ body {
   border-radius: 0.125rem;
   cursor: pointer;
   transition: all 0.1s ease;
-  box-shadow: 4px 4px 0 rgba(0,0,0,0.3), inset -2px -2px 0 rgba(0,0,0,0.2), inset 2px 2px 0 rgba(255,255,255,0.3);
-  transform: perspective(200px) rotateX(5deg);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+  transform: perspective(200px) rotateX(3deg);
   image-rendering: pixelated;
 }
 
 .voxel-letter:active,
 .voxel-letter.selected {
   background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
-  box-shadow: 6px 6px 0 rgba(0,0,0,0.3), inset -2px -2px 0 rgba(0,0,0,0.2);
-  transform: perspective(200px) rotateX(5deg) translateY(-4px);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+  transform: perspective(200px) rotateX(3deg) translateY(-2px);
 }
 
 .voxel-letter.disabled {
@@ -51,19 +51,21 @@ body {
 
 .voxel-letter.selected::after {
   position: absolute;
-  top: -0.5rem;
-  right: -0.5rem;
-  width: 1.25rem;
-  height: 1.25rem;
+  top: -0.75rem;
+  right: -0.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
   background-color: var(--color-gold);
   color: var(--color-dark);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: bold;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   content: attr(data-index);
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 /* Voxel button */
@@ -76,12 +78,12 @@ body {
   border-radius: 0.125rem;
   transition: all 0.1s ease;
   cursor: pointer;
-  box-shadow: 4px 4px 0 rgba(0,0,0,0.3), inset -2px -2px 0 rgba(0,0,0,0.2), inset 2px 2px 0 rgba(255,255,255,0.3);
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
 }
 
 .voxel-btn:active {
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.3), inset -2px -2px 0 rgba(0,0,0,0.2);
-  transform: translateY(2px) translateX(2px);
+  box-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+  transform: translateY(1px) translateX(1px);
 }
 
 /* Gold coin animation */
@@ -108,7 +110,7 @@ body {
   background-color: var(--color-gold);
   border-radius: 50%;
   animation: coinFall 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.4), inset -2px -2px 0 rgba(0,0,0,0.3), inset 2px 2px 0 rgba(255,255,255,0.5);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
   z-index: 1000;
 }
 

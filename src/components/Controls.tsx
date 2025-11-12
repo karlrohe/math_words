@@ -5,31 +5,13 @@ interface ControlsProps {
   onCheck: () => void;
 }
 
-export function Controls({ hasSelection, onBackspace, onClear, onCheck }: ControlsProps) {
+export function Controls({ hasSelection, onCheck }: { hasSelection: boolean; onCheck: () => void }) {
   return (
-    <div className="flex gap-3 justify-center flex-wrap">
-      <button
-        onClick={onBackspace}
-        disabled={!hasSelection}
-        className="voxel-btn disabled:opacity-40 disabled:cursor-not-allowed"
-        title="Remove last letter"
-      >
-        ← Backspace
-      </button>
-
-      <button
-        onClick={onClear}
-        disabled={!hasSelection}
-        className="voxel-btn disabled:opacity-40 disabled:cursor-not-allowed"
-        title="Clear all letters"
-      >
-        Clear
-      </button>
-
+    <div className="flex justify-center">
       <button
         onClick={onCheck}
         disabled={!hasSelection}
-        className="voxel-btn disabled:opacity-40 disabled:cursor-not-allowed font-bold"
+        className="voxel-btn text-sm px-4 py-2 disabled:opacity-40 disabled:cursor-not-allowed font-bold"
         style={{
           backgroundColor: hasSelection ? 'var(--color-gold)' : 'var(--color-orange)',
           color: hasSelection ? 'var(--color-dark)' : 'white',

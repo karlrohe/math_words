@@ -20,18 +20,13 @@ export function ScoreDisplay({ score }: ScoreDisplayProps) {
   }, [score, displayScore]);
 
   return (
-    <div className="text-center mb-6">
-      <p className="text-sm mb-2" style={{ color: 'var(--color-orange)' }}>
-        Total Score
-      </p>
+    <div className={`text-center transition-all ${animate ? 'score-update' : ''}`}>
       <div
-        className={`text-5xl font-bold p-4 rounded-sm inline-block transition-all ${
-          animate ? 'score-update' : ''
-        }`}
+        className="text-2xl font-bold px-3 py-1 rounded-sm inline-block"
         style={{
-          backgroundColor: 'rgba(255, 215, 0, 0.2)',
+          backgroundColor: 'rgba(255, 215, 0, 0.15)',
           color: 'var(--color-gold)',
-          border: '3px solid var(--color-gold)',
+          border: '2px solid var(--color-gold)',
         }}
       >
         {displayScore}

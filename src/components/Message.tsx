@@ -20,12 +20,11 @@ export function Message({ message, type }: MessageProps) {
 
   return (
     <div
-      className="text-center p-3 rounded-sm mb-4 animate-in fade-in"
+      className="text-center p-2 rounded-sm mb-2 animate-in fade-in text-sm"
       style={{
         backgroundColor: bgColor,
         color: textColor,
         fontWeight: 'bold',
-        fontSize: '0.95rem',
       }}
     >
       {message}

@@ -8,6 +8,7 @@ export default function App() {
   const {
     state,
     selectLetter,
+    deselectLetter,
     deselectLastLetter,
     clearSelection,
     setMode,
@@ -65,6 +66,7 @@ export default function App() {
         message={state.message}
         messageType={state.messageType}
         onLetterClick={selectLetter}
+        onLetterDeselect={deselectLetter}
         onBackspace={deselectLastLetter}
         onClear={clearSelection}
         onCheck={handleCheck}

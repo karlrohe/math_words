@@ -91,6 +91,16 @@ export function useGameState() {
     });
   }, []);
 
+  const deselectLetter = useCallback((index: number) => {
+    setState(prev => {
+      const newIndices = prev.selectedLetterIndices.filter(i => i !== index);
+      return {
+        ...prev,
+        selectedLetterIndices: newIndices,
+      };
+    });
+  }, []);
+
   const clearSelection = useCallback(() => {
     setState(prev => ({
       ...prev,
@@ -184,6 +194,7 @@ export function useGameState() {
   return {
     state,
     selectLetter,
+    deselectLetter,
     deselectLastLetter,
     clearSelection,
     setMode,

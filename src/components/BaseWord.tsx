@@ -6,9 +6,10 @@ interface BaseWordProps {
   selectedIndices: number[];
   mode: GameMode;
   onLetterClick: (index: number) => void;
+  onLetterDeselect?: (index: number) => void;
 }
 
-export function BaseWord({ word, selectedIndices, mode, onLetterClick }: BaseWordProps) {
+export function BaseWord({ word, selectedIndices, mode, onLetterClick, onLetterDeselect }: BaseWordProps) {
   // For continuous mode, disable letters that aren't consecutive
   const getDisabledState = (index: number): boolean => {
     if (mode !== 'continuous' || selectedIndices.length === 0) return false;
@@ -19,18 +20,13 @@ export function BaseWord({ word, selectedIndices, mode, onLetterClick }: BaseWor
   };
 
   return (
-    <div className="mb-8">
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--color-gold)' }}>
-          BASE WORD
-        </h2>
-        <p className="text-4xl font-bold tracking-widest mb-4" style={{ color: 'var(--color-blue)' }}>
-          {word}
-        </p>
-      </div>
+    <div className="mb-4">
+      <p className="text-3xl font-bold tracking-widest mb-4 text-center" style={{ color: 'var(--color-blue)' }}>
+        {word}
+      </p>
 
-      <div className="flex flex-wrap gap-3 justify-center bg-opacity-20 p-6 rounded"
-           style={{ backgroundColor: 'rgba(74, 144, 226, 0.1)' }}>
+      <div className="flex flex-wrap gap-3 justify-center p-3"
+           style={{ backgroundColor: 'transparent' }}>
         {word.split('').map((letter, index) => (
           <Letter
             key={index}
@@ -46,6 +42,11 @@ export function BaseWord({ word, selectedIndices, mode, onLetterClick }: BaseWor
             onClick={() => {
               if (!getDisabledState(index) && !selectedIndices.includes(index)) {
                 onLetterClick(index);
+              }
+            }}
+            onDeselect={() => {
+              if (onLetterDeselect) {
+                onLetterDeselect(index);
               }
             }}
           />
