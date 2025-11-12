@@ -9,8 +9,6 @@ export default function App() {
     state,
     selectLetter,
     deselectLetter,
-    deselectLastLetter,
-    clearSelection,
     setMode,
     addFoundWord,
     completeMathChallenge,
