@@ -37,11 +37,18 @@ body {
   image-rendering: pixelated;
 }
 
-.voxel-letter:active,
-.voxel-letter.selected {
+.voxel-letter:active {
   background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   box-shadow: 0 8px 16px rgba(255, 179, 71, 0.4), 0 0 12px rgba(255, 215, 0, 0.3);
   transform: perspective(200px) rotateX(3deg) translateY(-12px) scale(1.05);
+  animation: letterLift 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.voxel-letter.selected {
+  background: linear-gradient(135deg, var(--color-blue), var(--color-blue-dark));
+  opacity: 0.5;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), inset 0 0 8px rgba(0, 0, 0, 0.3);
+  transform: perspective(200px) rotateX(3deg) translateY(-8px);
   animation: letterLift 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -52,13 +59,13 @@ body {
 
 .voxel-letter.selected::after {
   position: absolute;
-  top: -0.75rem;
-  right: -0.75rem;
-  width: 1.5rem;
-  height: 1.5rem;
+  top: -0.5rem;
+  right: -0.5rem;
+  width: 1rem;
+  height: 1rem;
   background-color: var(--color-gold);
   color: var(--color-dark);
-  font-size: 0.85rem;
+  font-size: 0.65rem;
   font-weight: bold;
   border-radius: 50%;
   display: flex;
@@ -66,7 +73,8 @@ body {
   justify-content: center;
   content: attr(data-index);
   z-index: 10;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  opacity: 0.8;
 }
 
 /* Voxel button */
