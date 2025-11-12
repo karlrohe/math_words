@@ -7,7 +7,9 @@ interface CurrentWordProps {
 
 export function CurrentWord({ baseWord, selectedIndices }: CurrentWordProps) {
   const [prevLength, setPrevLength] = useState(0);
+  const [prevIndices, setPrevIndices] = useState<number[]>([]);
   const [newTileIndex, setNewTileIndex] = useState(-1);
+  const [wiggleTileIndex, setWiggleTileIndex] = useState(-1);
 
   const selectedLetters = selectedIndices.map((index, order) => ({
     letter: baseWord[index],
@@ -15,13 +17,27 @@ export function CurrentWord({ baseWord, selectedIndices }: CurrentWordProps) {
   }));
 
   useEffect(() => {
-    if (selectedIndices.length !== prevLength) {
+    // When ADDING a letter (length increases)
+    if (selectedIndices.length > prevLength) {
       setNewTileIndex(selectedIndices.length - 1);
       const timer = setTimeout(() => setNewTileIndex(-1), 400);
       setPrevLength(selectedIndices.length);
+      setPrevIndices(selectedIndices);
       return () => clearTimeout(timer);
     }
-  }, [selectedIndices.length, prevLength]);
+    // When REMOVING a letter (length decreases)
+    else if (selectedIndices.length < prevLength) {
+      // Find which index was removed
+      const removedIndex = prevIndices.findIndex(idx => !selectedIndices.includes(idx));
+      if (removedIndex !== -1) {
+        setWiggleTileIndex(removedIndex);
+        const timer = setTimeout(() => setWiggleTileIndex(-1), 300);
+        return () => clearTimeout(timer);
+      }
+      setPrevLength(selectedIndices.length);
+      setPrevIndices(selectedIndices);
+    }
+  }, [selectedIndices.length, selectedIndices, prevLength, prevIndices]);
 
   return (
     <div className="text-center mb-4">
@@ -42,7 +58,7 @@ export function CurrentWord({ baseWord, selectedIndices }: CurrentWordProps) {
             <div
               key={idx}
               className={`relative flex items-center justify-center font-bold text-white rounded-sm transition-all ${
-                newTileIndex === idx ? 'tile-pop' : ''
+                newTileIndex === idx ? 'tile-pop' : wiggleTileIndex === idx ? 'tile-wiggle' : ''
               }`}
               style={{
                 width: '3rem',
