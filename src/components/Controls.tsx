@@ -1,10 +1,3 @@
-interface ControlsProps {
-  hasSelection: boolean;
-  onBackspace: () => void;
-  onClear: () => void;
-  onCheck: () => void;
-}
-
 export function Controls({ hasSelection, onCheck }: { hasSelection: boolean; onCheck: () => void }) {
   return (
     <div className="flex justify-center">

@@ -67,8 +67,6 @@ export default function App() {
         messageType={state.messageType}
         onLetterClick={selectLetter}
         onLetterDeselect={deselectLetter}
-        onBackspace={deselectLastLetter}
-        onClear={clearSelection}
         onCheck={handleCheck}
         onModeChange={setMode}
         onNextWord={nextWord}

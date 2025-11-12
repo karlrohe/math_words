@@ -17,8 +17,6 @@ interface GameBoardProps {
   messageType: 'error' | 'success' | 'info' | '';
   onLetterClick: (index: number) => void;
   onLetterDeselect?: (index: number) => void;
-  onBackspace: () => void;
-  onClear: () => void;
   onCheck: () => void;
   onModeChange: (mode: GameMode) => void;
   onNextWord?: () => void;
@@ -34,8 +32,6 @@ export function GameBoard({
   messageType,
   onLetterClick,
   onLetterDeselect,
-  onBackspace,
-  onClear,
   onCheck,
   onModeChange,
   onNextWord,
